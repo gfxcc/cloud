@@ -31,7 +31,7 @@ file (GLOB_RECURSE source ${PROJECT_SOURCE_DIR}/*.cc )
 # COMPILE FLAG
 # -----------------------------------------------
 
-set (output_dir ${CMAKE_BINARY_DIR}/bin)
+set (output_dir ${CMAKE_BINARY_DIR})
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${output_dir})
 
 set (CMAKE_BUILD_TYPE "Debug")
@@ -49,7 +49,7 @@ set (CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
 
 add_executable (unittest ${source})
 
-target_link_libraries (
+target_link_libraries (unittest
   gtest
   gtest_main
 )
