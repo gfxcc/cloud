@@ -123,11 +123,15 @@ rgp() {
 
 init_cmake() {
   wget "https://raw.githubusercontent.com/gfxcc/cloud/master/init/cmake/CMakeLists.txt"
+  mkdir build
 }
 
 init_gtest() {
   wget "https://raw.githubusercontent.com/gfxcc/cloud/master/init/gtest/CMakeLists.txt"
   wget "https://raw.githubusercontent.com/gfxcc/cloud/master/init/gtest/unittest.cc"
+  mkdir build
 }
 
-
+init_make() {
+  wget "https://raw.githubusercontent.com/gfxcc/cloud/master/init/make/Makefile"
+}
