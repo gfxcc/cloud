@@ -13,8 +13,8 @@ alias ping8='ping 8.8.8.8'
 alias port='sudo lsof -i -P -n | grep LISTEN'
 
 # location alias
-alias lp='cd ~/Program'
-alias dp='cd ~/Dropbox/Program'
+alias lp='~/Program'
+alias dp='~/Dropbox/Program'
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -107,31 +107,79 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
 #
-# custom functions
+# customized functions
 #
 
-
+# recursively search KEYWORD under current path
 rgp() {
-  if [[ "$#" != 0  ]] && [[ "$#" == 1  ]]
-  then
-    grep -Rn "$1" ./*
-  else
-    echo "usage: rgp \"keywork\""
-  fi
+    if [[ "$#" != 0  ]] && [[ "$#" == 1  ]]; then
+        grep -Rn "$1" ./*
+    else
+        echo "usage: rgp \"keywork\""
+    fi
 
 }
 
 init_cmake() {
-  wget "https://raw.githubusercontent.com/gfxcc/cloud/master/init/cmake/CMakeLists.txt"
-  mkdir build
+    wget "https://raw.githubusercontent.com/gfxcc/cloud/master/init/cmake/CMakeLists.txt"
+    mkdir build
 }
 
 init_gtest() {
-  wget "https://raw.githubusercontent.com/gfxcc/cloud/master/init/gtest/CMakeLists.txt"
-  wget "https://raw.githubusercontent.com/gfxcc/cloud/master/init/gtest/unittest.cc"
-  mkdir build
+    wget "https://raw.githubusercontent.com/gfxcc/cloud/master/init/gtest/CMakeLists.txt"
+    wget "https://raw.githubusercontent.com/gfxcc/cloud/master/init/gtest/unittest.cc"
+    mkdir build
 }
 
 init_make() {
-  wget "https://raw.githubusercontent.com/gfxcc/cloud/master/init/make/Makefile"
+    wget "https://raw.githubusercontent.com/gfxcc/cloud/master/init/make/Makefile"
+}
+
+
+clean_vim() {
+    setopt rm_star_silent
+    rm -rf ~/.vimswap/*
+    rm -rf ~/.vimviews/*
+    setopt no_rm_star_silent
+}
+
+clean_cmake() {
+    rm -rf CMakeFiles
+    rm CMakeCache.txt
+}
+
+
+sync_conf() {
+    if [[ "$#" == 1  ]]; then
+        if [[ "$1" == "pull" ]]; then
+            echo "start pull mode"
+            # clone config repo
+            git clone https://github.com/gfxcc/cloud sync_conf_tmp
+            cp sync_conf_tmp/conf/.vimrc ~/.vimrc
+            cp sync_conf_tmp/conf/.zhsrc ~/.zshrc
+            setopt rm_star_silent
+            rm -rf sync_conf_tmp
+            setopt no_rm_star_silent
+            echo "sync_conf pull SUCCESSE"
+        elif [[ "$1" == "push" ]]; then
+            echo "start push mode"
+            # clone config repo
+            git clone https://github.com/gfxcc/cloud sync_conf_tmp
+            cp ~/.vimrc sync_conf_tmp/conf/.vimrc
+            cp ~/.zshrc sync_conf_tmp/conf/.zshrc
+
+            cd sync_conf_tmp
+            git add conf/.vimrc
+            git add conf/.zshrc
+            git commit -m "sync_conf push on $(hostname)"
+            git push
+            cd ..
+            setopt rm_star_silent
+            rm -rf sync_conf_tmp
+            setopt no_rm_star_silent
+            echo "sync_conf push SUCCESSE"
+        fi
+    else
+        echo "Usage: sync_conf (pull|push)"
+    fi
 }
