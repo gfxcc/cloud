@@ -16,6 +16,9 @@ alias port='sudo lsof -i -P -n | grep LISTEN'
 alias lp='~/Program'
 alias dp='~/Dropbox/Program'
 
+# git alias
+alias gs='git status'
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -150,7 +153,7 @@ clean_cmake() {
 
 
 sync_conf() {
-    if [[ "$#" == 1  ]]; then
+    if [[ "$#" -ge 1  ]]; then
         if [[ "$1" == "pull" ]]; then
             echo "start pull mode"
             # clone config repo
@@ -171,7 +174,14 @@ sync_conf() {
             cd sync_conf_tmp
             git add conf/.vimrc
             git add conf/.zshrc
-            git commit -m "sync_conf push on $(hostname)"
+
+            # check if commit message is given
+            if [[ "$#" == 2 ]]; then
+                COMMIT_MSG=$2
+            else
+                COMMIT_MSG="sync_conf push on $(hostname)"
+            fi
+            git commit -m ${COMMIT_MSG}
             git push
             cd ..
             setopt rm_star_silent

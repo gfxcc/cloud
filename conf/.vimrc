@@ -108,9 +108,12 @@
         if has('unnamedplus')  " When possible use + register for copy-paste
             set clipboard=unnamed,unnamedplus
         else         " On mac and Windows, use * register for copy-paste
-            set clipboard=unnamed
+            if $TMUX == ''
+                set clipboard+=unnamed
+            endif
         endif
     endif
+
 
     " Most prefer to automatically switch to the current file directory when
     " a new buffer is opened; to prevent this behavior, add the following to
@@ -725,11 +728,6 @@
             " enable completion from tags
             let g:ycm_collect_identifiers_from_tags_files = 1
 
-            " remap Ultisnips for compatibility for YCM
-            let g:UltiSnipsExpandTrigger = '<C-j>'
-            let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-            let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-
             " Enable omni completion.
             autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
             autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -1281,3 +1279,6 @@ set nofoldenable
 " shortcut
 nnoremap <F7> :tabp <CR>
 nnoremap <F8> :tabn <CR>
+
+nnoremap <C-j> <C-e>
+nnoremap <C-k> <C-y>
