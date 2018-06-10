@@ -181,7 +181,7 @@ sync_conf() {
             else
                 COMMIT_MSG="sync_conf push on $(hostname)"
             fi
-            git commit -m ${COMMIT_MSG}
+            git commit -m "${COMMIT_MSG}"
             git push
             cd ..
             setopt rm_star_silent
