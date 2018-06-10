@@ -143,6 +143,7 @@
     " Restore cursor to file position in previous editing session
     " To disable this, add the following to your .vimrc.before.local file:
     "   let g:spf13_no_restore_cursor = 1
+    " EXPENSIVE
     if !exists('g:spf13_no_restore_cursor')
         function! ResCur()
             if line("'\"") <= line("$")
@@ -1261,6 +1262,15 @@
 " My personal config
 "
 
+"
+" functions
+"
+function StopProfiling()
+  profdel func *
+  profdel file *
+  qa!
+endfunction
+
 " disable auto comment
 autocmd FileType * setlocal formatoptions-=cro
 
@@ -1282,3 +1292,5 @@ nnoremap <F8> :tabn <CR>
 
 nnoremap <C-j> <C-e>
 nnoremap <C-k> <C-y>
+
+command! -nargs=0 StopProfiling call StopProfiling()

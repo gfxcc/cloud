@@ -151,6 +151,12 @@ clean_cmake() {
     rm CMakeCache.txt
 }
 
+startvimprofile() {
+    vim --cmd 'profile start vim.profile' \
+        --cmd 'profile func *'                 \
+        --cmd 'profile file *' $1
+}
+
 
 sync_conf() {
     if [[ "$#" -ge 1  ]]; then
