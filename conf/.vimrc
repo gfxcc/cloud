@@ -197,7 +197,10 @@
 " }
 
 " Formatting {
-
+    "   N-s = namespace no indent
+    "   h2  = class scope declaration 
+    "   g2  = indentation after public/private
+    set cinoptions=N-sh2g2
     set nowrap                      " Do not wrap long lines
     set autoindent                  " Indent at the same level of the previous line
     set shiftwidth=4                " Use indents of 4 spaces
@@ -413,11 +416,12 @@
         endif
     "}
 
+    let g:UltiSnipsExpandTrigger = '<C-n>'
+
     if !exists('g:YouCompleteMe_Bloomberg')
 
         " YouCompleteMe {
-        if count(g:spf13_bundle_groups, 'youcompleteme')
-            nnoremap <C-F> :YcmCompleter GoToDeclaration <CR>
+            nnoremap <C-F> :YcmCompleter GoToDefinition <CR>
             nnoremap <F2> :YcmCompleter FixIt <CR>
             let g:acp_enableAtStartup = 0
             let g:ycm_confirm_extra_conf = 0
@@ -458,7 +462,6 @@
             " When enabled, there can be too much visual noise
             " especially when splits are used.
             set completeopt-=preview
-        endif
         " }
 
     else 
