@@ -1,7 +1,3 @@
-# # # # # # # # # #
-# custom section  #
-# # # # # # # # # #
-
 
 # # # # # # # # # #
 # generic section #
@@ -43,3 +39,11 @@ source ${HOME}/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 #
 FILE="${HOME}/.iterm2_shell_integration.zsh" && test -f ${FILE}  && source ${FILE}
 FILE="${HOME}/.zsh/local_functions.zsh" && test -f ${FILE} && source ${FILE}
+
+
+
+# # # # # # # # # #
+# custom section  #
+# # # # # # # # # #
+
+
