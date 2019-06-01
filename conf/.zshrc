@@ -10,8 +10,15 @@ export ZSH=/Users/ycao155/.oh-my-zsh
 export LANG=en_US.UTF-8
 export ARCHFLAGS="-arch x86_64"
 
-alias gs='git status'
+
 alias p3='python3.7'
+
+# network
+alias p8='ping 8.8.8.8'
+
+# git
+alias gs='git status'
+alias glg='git log --graph'
 
 #
 # generic functions
