@@ -6,10 +6,9 @@
 DISABLE_AUTO_UPDATE="true"
 ZSH_THEME="af-magic"
 
-export ZSH=/Users/ycao155/.oh-my-zsh
+export ZSH=/Users/gfxcc/.oh-my-zsh
 export LANG=en_US.UTF-8
 export ARCHFLAGS="-arch x86_64"
-
 
 alias p3='python3.7'
 
@@ -41,8 +40,7 @@ bindkey "^[^[[D" backward-word
 # critical import
 #
 source ${ZSH}/oh-my-zsh.sh
-# Disable autosuggestion in vscode integrated terminal.
-#   Config terminal.integrated.env.osx in vscode to set VSCODE
+# disable autosuggestion in vscode integrated terminal
 [ -z $VSCODE ] && source ${HOME}/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 #
@@ -53,11 +51,15 @@ FILE="${HOME}/.zsh/local_functions.zsh" && test -f ${FILE} && source ${FILE}
 
 # tmux
 if [ -z $TMUX ] && [ -z $VSCODE ]; then
-    tmux -u
+    unattached_session=$(tmux ls | grep -v attached | head -1)
+    if [[ -z ${unattached_session} ]]; then
+        tmux -u
+    else
+        tmux a
+    fi
 fi
 
 # # # # # # # # # #
 # custom section  #
 # # # # # # # # # #
-
 
