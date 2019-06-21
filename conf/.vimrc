@@ -760,8 +760,8 @@ nnoremap <C-X> :w<CR>
 inoremap <C-X> <C-O>:w<CR>
 
 " high light character goes over 80 column
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%80v.\+/
+set colorcolumn=80
+highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 " set foldmethod and keep fold open when opening new file
 set foldmethod=syntax
