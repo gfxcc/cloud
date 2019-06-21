@@ -33,8 +33,8 @@ function srgp() {
 #
 # key bind
 #
-bindkey "^[^[[C" forward-word
-bindkey "^[^[[D" backward-word
+bindkey '^W' forward-word
+bindkey '^B' backward-word
 
 #
 # critical import
@@ -50,13 +50,16 @@ FILE="${HOME}/.iterm2_shell_integration.zsh" && test -f ${FILE}  && source ${FIL
 FILE="${HOME}/.zsh/local_functions.zsh" && test -f ${FILE} && source ${FILE}
 
 # tmux
+#   1. kill existed unattached session
+#   2. open a new session
 if [ -z $TMUX ] && [ -z $VSCODE ]; then
-    unattached_session=$(tmux ls | grep -v attached | head -1)
-    if [[ -z ${unattached_session} ]]; then
-        tmux -u
-    else
-        tmux a
+    unattached_sessions=$(tmux ls | grep -v attached)
+    if [[ -n ${unattached_sessions} ]]; then
+        for i in $(echo ${unattached_sessions} | cut -d ':' -f 1); do
+            tmux kill-session -t $i
+        done
     fi
+    tmux -u
 fi
 
 # # # # # # # # # #
