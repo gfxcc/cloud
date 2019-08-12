@@ -33,8 +33,8 @@ function srgp() {
 #
 # key bind
 #
-bindkey '^W' forward-word
-bindkey '^B' backward-word
+bindkey "^W" forward-word
+bindkey "^B" backward-word
 
 #
 # critical import
@@ -65,4 +65,10 @@ fi
 # # # # # # # # # #
 # custom section  #
 # # # # # # # # # #
+
+alias xopen='open -a xcode'
+alias mdopen='open -a MacDown'
+alias ping8='ping 8.8.8.8'
+alias port='sudo lsof -i -P -n | grep LISTEN'
+
 
