@@ -1,14 +1,3 @@
-# # # # # # # # # #
-# custom section  #
-# # # # # # # # # #
-
-export ZSH=/Users/gfxcc/.oh-my-zsh
-
-alias xopen='open -a xcode'
-alias mdopen='open -a MacDown'
-alias ping8='ping 8.8.8.8'
-alias port='sudo lsof -i -P -n | grep LISTEN'
-
 
 # # # # # # # # # #
 # generic section #
@@ -74,3 +63,15 @@ if [ -z $TMUX ] && [ -z $VSCODE ]; then
     fi
     tmux -u
 fi
+
+# # # # # # # # # #
+# custom section  #
+# # # # # # # # # #
+
+export ZSH=/Users/gfxcc/.oh-my-zsh
+
+alias xopen='open -a xcode'
+alias mdopen='open -a MacDown'
+alias ping8='ping 8.8.8.8'
+alias port='sudo lsof -i -P -n | grep LISTEN'
+
