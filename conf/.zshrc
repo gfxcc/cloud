@@ -12,6 +12,9 @@ export ARCHFLAGS="-arch x86_64"
 
 alias p3='python3.7'
 
+# color
+LS_COLORS=$LS_COLORS:'di=0;35:' ; export LS_COLORS
+
 # network
 alias p8='ping 8.8.8.8'
 
