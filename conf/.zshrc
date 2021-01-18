@@ -1,3 +1,4 @@
+export ZSH=/Users/yongcao/.oh-my-zsh
 
 # # # # # # # # # #
 # generic section #
@@ -6,20 +7,45 @@
 DISABLE_AUTO_UPDATE="true"
 ZSH_THEME="af-magic"
 
+
+#
+# critical import
+#
+source ${ZSH}/oh-my-zsh.sh
+# disable autosuggestion in vscode integrated terminal
+[ -z $VSCODE ] && source ${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+
 export LANG=en_US.UTF-8
 export ARCHFLAGS="-arch x86_64"
+export LSCOLORS=exfxcxdxbxegedabagacad
 
-alias p3='python3.7'
 
-# color
-LS_COLORS=$LS_COLORS:'di=0;35:' ; export LS_COLORS
+alias p3='python3'
 
+#
 # network
+#
+alias port='sudo lsof -i -P -n | grep LISTEN'
 alias p8='ping 8.8.8.8'
 
+#
 # git
+#
 alias gs='git status'
+alias gd='git diff'
 alias glg='git log --graph'
+
+
+#
+# docker
+#
+docker_build='docker build -t `basename $PWD` .'
+alias docker-build=${docker_build}
+alias docker-run=${docker_build}' && docker run -v $(pwd):/workdir --rm -it $(basename $PWD) bash'
+alias docker-mariner='docker build -f .mariner.Dockerfile .'
+alias docker-berg="docker-compose -f ~/Program/local_development/berg/docker-compose.yaml run -v `pwd`:/workdir berg bash"
+
 
 #
 # generic functions
@@ -37,13 +63,6 @@ function srgp() {
 #
 bindkey "^W" forward-word
 bindkey "^B" backward-word
-
-#
-# critical import
-#
-source ${ZSH}/oh-my-zsh.sh
-# disable autosuggestion in vscode integrated terminal
-[ -z $VSCODE ] && source ${HOME}/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 #
 # optional import
@@ -68,10 +87,13 @@ fi
 # custom section  #
 # # # # # # # # # #
 
-export ZSH=/Users/gfxcc/.oh-my-zsh
+#
+# OS specific
+#
 
-alias xopen='open -a xcode'
-alias mdopen='open -a MacDown'
-alias ping8='ping 8.8.8.8'
-alias port='sudo lsof -i -P -n | grep LISTEN'
+# MacOS
+if [[ $(uname) = "Darwin" ]]; then
+    alias xopen='open -a xcode'
+fi
+
 
