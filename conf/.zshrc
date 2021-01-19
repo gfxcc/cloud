@@ -43,8 +43,6 @@ alias glg='git log --graph'
 docker_build='docker build -t `basename $PWD` .'
 alias docker-build=${docker_build}
 alias docker-run=${docker_build}' && docker run -v $(pwd):/workdir --rm -it $(basename $PWD) bash'
-alias docker-mariner='docker build -f .mariner.Dockerfile .'
-alias docker-berg="docker-compose -f ~/Program/local_development/berg/docker-compose.yaml run -v `pwd`:/workdir berg bash"
 
 
 #
