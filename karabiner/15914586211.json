@@ -1,0 +1,30 @@
+{
+  "title": "Alt+Esc -> Alt+~",
+  "rules": [
+    {
+      "description": "Alt+Esc -> Alt+~",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "escape",
+            "modifiers": {
+              "mandatory": [
+                "left_alt"
+              ],
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "grave_accent_and_tilde",
+               "modifiers": ["left_alt"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
