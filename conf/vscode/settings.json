@@ -1,0 +1,38 @@
+{
+    "workbench.colorTheme": "Solarized Dark",
+    "python.defaultInterpreterPath": "/usr/local/opt/python@3.8/bin/python3.8",
+    "terminal.integrated.env.osx": {
+        // Used by integrated terminal to check current environment.
+        "VSCODE": "TRUE"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "mohd-akram.vscode-html-format"
+    },
+    "[proto3]": {
+        "editor.defaultFormatter": "zxh404.vscode-proto3"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "js/ts.implicitProjectConfig.experimentalDecorators": true,
+    "workbench.startupEditor": "none",
+    "explorer.confirmDelete": false,
+    "python.analysis.typeCheckingMode": "basic",
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true,
+    },
+    "[css]": {
+        "editor.defaultFormatter": "lonefy.vscode-JS-CSS-HTML-formatter"
+    },
+    "editor.minimap.enabled": false,
+    "window.zoomLevel": 1,
+}
