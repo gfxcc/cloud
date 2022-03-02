@@ -1,3 +1,5 @@
+export ZSH=~/.oh-my-zsh
+
 # # # # # # # # # #
 # generic section #
 # # # # # # # # # #
