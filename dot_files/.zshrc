@@ -11,7 +11,7 @@ ZSH_THEME="af-magic"
 #
 # critical import
 #
-source ~/oh-my-zsh.sh
+source ${ZSH}/oh-my-zsh.sh
 # disable autosuggestion in vscode integrated terminal
 [ -z $VSCODE ] && source ${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
