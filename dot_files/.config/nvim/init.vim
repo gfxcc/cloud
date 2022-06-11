@@ -1,9 +1,12 @@
-" Fundamentals 
+" Fundamentals
+set encoding=UTF-8
 set nocompatible
 set number
+set mouse=a
+set cursorline
 
 
-" Imports 
+" Imports
 " ---------------------------------------------------------------------
 runtime ./plug.vim
 runtime ./maps.vim
@@ -42,7 +45,7 @@ nnoremap <leader>n :NvimTreeFindFile<CR>
 set termguicolors " this variable must be enabled for colors to be applied properly
 
 " a list of groups can be found at `:help nvim_tree_highlight`
-"highlight NvimTreeFolderIcon guibg=blue
+" highlight NvimTreeFolderIcon guibg=blue
 
 lua require'nvim-tree'.setup()
 lua require'nvim-web-devicons'.setup()
