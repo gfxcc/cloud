@@ -27,7 +27,12 @@ if exists("&termguicolors") && exists("&winblend")
   colorscheme NeoSolarized
 endif
 
-
+" Uncomment the following to have Vim jump to the last position when
+" reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif
+endif
 
 nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
@@ -49,4 +54,5 @@ set termguicolors " this variable must be enabled for colors to be applied prope
 
 lua require'nvim-tree'.setup()
 lua require'nvim-web-devicons'.setup()
+
 
