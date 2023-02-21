@@ -67,6 +67,7 @@ bindkey "^B" backward-word
 #
 FILE="${HOME}/.iterm2_shell_integration.zsh" && test -f ${FILE}  && source ${FILE}
 FILE="${HOME}/.zsh/local_functions.zsh" && test -f ${FILE} && source ${FILE}
+FILE="${HOME}/.zsh/local_alias.zsh" && test -f ${FILE} && source ${FILE}
 
 # tmux
 #   1. kill existed unattached session
