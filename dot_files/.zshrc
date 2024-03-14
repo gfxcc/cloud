@@ -22,6 +22,7 @@ export LSCOLORS=exfxcxdxbxegedabagacad
 
 
 alias p3='python3'
+alias vim='nvim'
 
 #
 # network
@@ -93,6 +94,7 @@ fi
 # MacOS
 if [[ $(uname) = "Darwin" ]]; then
     alias xopen='open -a xcode'
+    alias check-temp='sudo powermetrics -i 1000 --samplers smc | grep -E "(Fan|temp)"'
 fi
 
 
