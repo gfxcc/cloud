@@ -32,11 +32,13 @@ function precmd() {
   fi
 }
 
+
 # primary prompt
-PROMPT='${bj_prompt}\
+PROMPT='${return_code} %F{cyan}Took ${elapsed} %{$reset_color%}
+${bj_prompt}\
 $DALLAS_CURRENT_TIME_%{$reset_color%} \
 $FG[032]%~\
-$(git_prompt_info) ${return_code}
+$(git_prompt_info) 
 $FG[105]%(!.#.»)%{$reset_color%} '
 
 # The secondary prompt, printed when the shell needs more information to complete a command. E.g.
@@ -45,7 +47,7 @@ $FG[105]%(!.#.»)%{$reset_color%} '
 PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
 
 # Display the execution time of the previous cmd on the right-hand side of the screen.
-RPS1='%F{cyan}${elapsed} %{$reset_color%}'
+# RPS1='%F{cyan}${elapsed} %{$reset_color%}'
 
 
 # color vars
@@ -58,3 +60,5 @@ ZSH_THEME_GIT_PROMPT_PREFIX="$FG[075]($FG[078]"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_DIRTY="$my_orange*%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="$FG[075])%{$reset_color%}"
+
+
