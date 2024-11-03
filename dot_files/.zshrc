@@ -1,11 +1,68 @@
 export ZSH=~/.oh-my-zsh
 
 # # # # # # # # # #
+# Function section#
+# # # # # # # # # #
+
+# Attachs to a tmux session or creates a new one if it doesn't exist
+tmux_create_or_attach() {
+  # Name of the tmux session to create or attach to
+  local session_name="${1:-default}"
+
+  # Check if the session already exists
+  if tmux has-session -t "$session_name" 2>/dev/null; then
+    echo "Attaching to existing tmux session: $session_name"
+    tmux attach-session -t "$session_name"
+  else
+    echo "Creating new tmux session: $session_name"
+    tmux new-session -s "$session_name"
+  fi
+}
+
+#   1. kill existed unattached session
+#   2. open a new session
+#
+# This is helpful to avoid creating lots of unused session on local dev machine
+# when you do not want to share a same session across iterm tabs.
+# Not suitable for a long running server
+tmux_clean_and_create() {
+    if [ -z $TMUX ] ; then
+        unattached_sessions=$(tmux ls | grep -v attached)
+        if [[ -n ${unattached_sessions} ]]; then
+            for i in $(echo ${unattached_sessions} | cut -d ':' -f 1); do
+                tmux kill-session -t $i
+            done
+        fi
+        tmux -u
+    fi
+}
+
+# Entrance of tmux
+tmux_entrance() {
+    # Do not use tmux in vscode or a tmux env
+    if [[ -n $VSCODE || -n $TMUX ]]; then
+        return
+    fi
+
+    if [[ $(uname) = "Darwin" ]]; then
+        # For MacOS
+        tmux_clean_and_create
+    else
+        tmux_create_or_attach
+    fi
+}
+
+# # # # # # # # # #
 # generic section #
 # # # # # # # # # #
 
 DISABLE_AUTO_UPDATE="true"
 ZSH_THEME="af-magic"
+
+plugins=( 
+    # other plugins...
+    zsh-autosuggestions
+)
 
 
 #
@@ -70,18 +127,7 @@ FILE="${HOME}/.iterm2_shell_integration.zsh" && test -f ${FILE}  && source ${FIL
 FILE="${HOME}/.zsh/local_functions.zsh" && test -f ${FILE} && source ${FILE}
 FILE="${HOME}/.zsh/local_alias.zsh" && test -f ${FILE} && source ${FILE}
 
-# tmux
-#   1. kill existed unattached session
-#   2. open a new session
-if [ -z $TMUX ] && [ -z $VSCODE ]; then
-    unattached_sessions=$(tmux ls | grep -v attached)
-    if [[ -n ${unattached_sessions} ]]; then
-        for i in $(echo ${unattached_sessions} | cut -d ':' -f 1); do
-            tmux kill-session -t $i
-        done
-    fi
-    tmux -u
-fi
+tmux_entrance
 
 # # # # # # # # # #
 # custom section  #
@@ -96,5 +142,3 @@ if [[ $(uname) = "Darwin" ]]; then
     alias xopen='open -a xcode'
     alias check-temp='sudo powermetrics -i 1000 --samplers smc | grep -E "(Fan|temp)"'
 fi
-
-
