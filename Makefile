@@ -36,18 +36,21 @@ install-zsh:
 		echo "zsh-autosuggestions is already installed."; \
 	fi
 
+	# Set zsh-autosuggestions highlight style
+	@sed -i "s/^typeset -g ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=.*/typeset -g ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'/" ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 install-neovim:
 	$(INSTALL_CMD) neovim
 	# Install https://github.com/junegunn/vim-plug?tab=readme-ov-file#installation
 	sh -c 'curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-	nvim --headless +PlugInstall +qa
 
 install-docker:
 	scripts/install-docker.sh	
 
 copy-config:
 	@find $(DOT_FILES_DIR) -mindepth 1 -maxdepth 1 -print -exec cp -r {} ~/ \;
+	nvim --headless +PlugInstall +qa
 
 test-ub:
 	@docker run -it --rm \
