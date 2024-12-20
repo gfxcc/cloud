@@ -2,6 +2,7 @@
 DOT_FILES_DIR=dot_files
 INSTALL_CMD=
 ZSH=~/.oh-my-zsh
+TTY_FLAG=$(if $(shell [ -t 0 ] && echo true),-it,)
 
 # Detect OS and set the install command
 ifeq ($(shell uname), Darwin)
@@ -53,7 +54,7 @@ copy-config:
 	nvim --headless +PlugInstall +qa
 
 test-ub:
-	@docker run -it --rm \
+	@docker run $(TTY_FLAG) --rm \
 		-v `pwd`:/app \
 		-w /app \
 		--env HOME=/home/nonrootuser \
