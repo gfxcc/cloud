@@ -1,6 +1,7 @@
 # Variables
 DOT_FILES_DIR=dot_files
 INSTALL_CMD=
+ZSH=~/.oh-my-zsh
 
 # Detect OS and set the install command
 ifeq ($(shell uname), Darwin)
@@ -19,7 +20,15 @@ install-basic:
 
 install-zsh:
 	sudo apt-get install -y zsh
-	curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
+
+	# Install oh-my-zsh
+	if [ ! -d "$(ZSH)" ]; then \
+		curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh; \
+	else \
+		echo "oh-my-zsh is already installed."; \
+	fi
+
+	# Install zsh-autosuggestions
 	@if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then \
 		echo "Cloning zsh-autosuggestions..."; \
 		git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions; \
